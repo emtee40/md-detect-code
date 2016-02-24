@@ -13,7 +13,7 @@ import java.util.concurrent.*;
 /*
  *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
  */
-public class Main {
+public class MdDetect {
 
     private static final boolean VERBOSE = false;
 
@@ -885,6 +885,77 @@ public class Main {
                         ""
                 },
                 new String[]{}
+        ), JS(
+                6,
+                new String[]{
+                        "js",
+                        "javascript"
+                },
+                new String[]{
+                        "abstract",
+                        "arguments",
+                        "boolean",
+                        "break",
+                        "byte",
+                        "case",
+                        "catch",
+                        "char",
+                        "class*",
+                        "const",
+                        "continue",
+                        "debugger",
+                        "default",
+                        "delete",
+                        "do",
+                        "double",
+                        "else",
+                        "enum*",
+                        "eval",
+                        "export*",
+                        "extends*",
+                        "false",
+                        "final",
+                        "finally",
+                        "float",
+                        "for",
+                        "function",
+                        "goto",
+                        "if",
+                        "implements",
+                        "import*",
+                        "in",
+                        "instanceof",
+                        "int",
+                        "interface",
+                        "let",
+                        "long",
+                        "native",
+                        "new",
+                        "null",
+                        "package",
+                        "private",
+                        "protected",
+                        "public",
+                        "return",
+                        "short",
+                        "static",
+                        "super*",
+                        "switch",
+                        "synchronized",
+                        "this",
+                        "throw",
+                        "throws",
+                        "transient",
+                        "true",
+                        "try",
+                        "typeof",
+                        "var",
+                        "void",
+                        "volatile",
+                        "while",
+                        "with",
+                        "yield"
+                }
         );
 
         /**
@@ -921,29 +992,12 @@ public class Main {
 
         final int[] scores = new int[Lang.values().length];
 
+        // iterate over words
         for (String token : tokens) {
-
-            if (looksLike(token, Lang.C_SHARP)) {
-                scores[Lang.C_SHARP.index]++;
+            // compare to known langs
+            for (Lang lang : Lang.values()) {
+                if (looksLike(token, lang)) scores[lang.index]++;
             }
-
-            if (looksLike(token, Lang.HTML)) {
-                scores[Lang.HTML.index]++;
-            }
-
-            if (looksLike(token, Lang.VB)) {
-                scores[Lang.VB.index]++;
-            }
-
-            if (looksLike(token, Lang.SQL)) {
-                scores[Lang.SQL.index]++;
-            }
-
-// TODO add XML support
-//            if (looksLike(token, Lang.XML)) {
-//                scores[Lang.XML.index]++;
-//            }
-
         }
 
         // total the scores & pick
