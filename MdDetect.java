@@ -159,6 +159,8 @@ public class MdDetect {
             "C#",
             "c#",
             "java",
+            "js",
+            "javascript",
             "html",
             "HTML",
             "VB.net",
